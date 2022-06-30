@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string("nickname")->nullable();
             $table->integer("sum_rating")->nullable();
             $table->dateTime('created_at');
-            $table->dateTime("updated_at");
+            $table->dateTime("updated_at")->nullable();
 
         });
     }
