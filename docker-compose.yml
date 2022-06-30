@@ -22,7 +22,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   app:
-    container_name: symfony-starter
     env_file:
       - parameters.yml.dist
     build:
@@ -79,7 +78,7 @@ services:
       - ./src/frontEnd/react/reactBasedService/ethika:/home/node/app
     ports:
       - 3000:3000
-    command: bash -c "npm init react-app ethika && npm start"
+    command: bash -c "npm install && npm start"
     labels:
       - "traefik.http.routers.laravel1.rule=Host(`react.docker.localhost`)"
       - "traefik.enable=true"
