@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Container, Row} from "react-bootstrap";
+import {useEffect, useState} from "react";
+import {GamesRepository} from "./repositories/GamesRepository";
+import {Games} from "./components/Games";
 
 function App() {
+
+    let gamesRepository = new GamesRepository();
+    let jsxGames = null;
+    const [games,setGames] = useState([]);
+    const [onGameRun,setGameRun] = useState(0);
+
+    useEffect(() => {
+        gamesRepository.all().then((response) =>{
+            setGames(response);
+        })
+    },[onGameRun]);
+
+    if(games){
+        jsxGames = <Games games={games}/>
+    }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+        {jsxGames}
+    </Container>
   );
 }
 
